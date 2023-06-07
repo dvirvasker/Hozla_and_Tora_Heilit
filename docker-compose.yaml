@@ -53,11 +53,11 @@ services:
     image: "mongo"
     restart: always
     ports:
-      - '20717:27017'
+      - '2717:27017'
     networks:
       - hozla-app-network
     volumes:
-      - mongodb:/data/db
+      - ./hozla_data/db:/data/db
 
   backend:
     build: ./Backend
@@ -87,10 +87,10 @@ services:
     depends_on:
       - backend
 
-volumes:
-  mongodb:
-    driver: local
-  # logs:
+# volumes:
+#   mongodb:
+#     driver: local
+#   # logs:
 
 
 networks:
