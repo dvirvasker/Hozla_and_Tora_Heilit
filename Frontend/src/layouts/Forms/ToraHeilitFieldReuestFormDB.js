@@ -114,7 +114,7 @@ const ToraHeilitFieldReuestFormDB = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/hozlaRequests/${params.formID}`)
+      .get(`http://localhost:5000/HozlaApi/hozlaRequests/${params.formID}`)
       .then((response) => {
         // console.log(`the object data`);
         console.log(response.data);
@@ -129,7 +129,7 @@ const ToraHeilitFieldReuestFormDB = () => {
         // console.log(toraHeilitVolume);
         // setClientNote(response.data.clientNote.split("\n"));
         axios
-          .get(`http://localhost:5000/hozlaRequests/sameRequest/${params.formID}`)
+          .get(`http://localhost:5000/HozlaApi/hozlaRequests/sameRequest/${params.formID}`)
           .then((res) => {
             console.log(res.data);
             setText({
@@ -143,7 +143,7 @@ const ToraHeilitFieldReuestFormDB = () => {
       });
 
     // axios
-    //   .get(`http://localhost:5000/toraHeilit/`)
+    //   .get(`http://localhost:5000/HozlaApi/toraHeilit/`)
     //   .then((res) => {
     //     setToraHeilitStatus(JSON.parse(res.data.toraHeilitVolumes));
     //   })
@@ -167,7 +167,7 @@ const ToraHeilitFieldReuestFormDB = () => {
     //     }
     //   });
     // });
-    // axios.get(`http://localhost:5000/api/showFiles`).then((res) => {
+    // axios.get(`http://localhost:5000/HozlaApi/showFiles`).then((res) => {
     //   console.log(res.data);
     //   setToraHeilitFiles(res.data.toraHeilitFiles);
 
@@ -177,7 +177,7 @@ const ToraHeilitFieldReuestFormDB = () => {
 
   // const getFiles = () => {
   //   axios
-  //     .get(`http://localhost:5000/api/getMultipleFiles/${formData.files_id}`)
+  //     .get(`http://localhost:5000/HozlaApi/getMultipleFiles/${formData.files_id}`)
   //     .then((response) => {
   //       setFilesFromDB(response.data.files);
   //       console.log(`files: ${response.data}`);
@@ -204,7 +204,7 @@ const ToraHeilitFieldReuestFormDB = () => {
     const newUrlPath = urlPath.slice(8);
     // console.log(`Frontend ${newUrlPath}`);
     // axios
-    //   .get(`http://localhost:5000/api/downloadPDFFile/${newUrlPath}`, { responseType: "blob" })
+    //   .get(`http://localhost:5000/HozlaApi/downloadPDFFile/${newUrlPath}`, { responseType: "blob" })
     //   .then((res) => {
     //     FileDownload(res.data, fileName);
     //   });
@@ -347,7 +347,7 @@ const ToraHeilitFieldReuestFormDB = () => {
     console.log(newStatus);
 
     axios
-      .post(`http://localhost:5000/hozlaRequests/statusUpdate/${params.formID}`, {
+      .post(`http://localhost:5000/HozlaApi/hozlaRequests/statusUpdate/${params.formID}`, {
         status: newStatus,
       })
       .then((response) => {
@@ -377,7 +377,10 @@ const ToraHeilitFieldReuestFormDB = () => {
       fullNameReciver: data.fullNameReciver,
     };
     axios
-      .post(`http://localhost:5000/hozlaRequests/updateNameReciver/${params.formID}`, NameReciver)
+      .post(
+        `http://localhost:5000/HozlaApi/hozlaRequests/updateNameReciver/${params.formID}`,
+        NameReciver
+      )
       .then((response) => {
         // console.groupCollapsed(`handleStatusChange -------- Axios.then`);
         // console.log(response.data);
@@ -413,7 +416,10 @@ const ToraHeilitFieldReuestFormDB = () => {
       toraHeilitVolumes: JSON.stringify(toraHeilitVolume),
     };
     axios
-      .post(`http://localhost:5000/hozlaRequests/updateNumVolume/${params.formID}`, updateNumVol)
+      .post(
+        `http://localhost:5000/HozlaApi/hozlaRequests/updateNumVolume/${params.formID}`,
+        updateNumVol
+      )
       .then((response) => {
         // console.groupCollapsed(`handleStatusChange -------- Axios.then`);
         // console.log(response.data);

@@ -2,7 +2,7 @@
 /* eslint-disable no-else-return */
 /* eslint-disable arrow-body-style */
 export const signup = (user) => {
-  return fetch(`http://localhost:5000/api/signup`, {
+  return fetch(`http://localhost:5000/HozlaApi/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -19,7 +19,7 @@ export const signup = (user) => {
 };
 // not in use
 export const signin = (user) => {
-  return fetch(`http://localhost:5000/api/signin`, {
+  return fetch(`http://localhost:5000/HozlaApi/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",

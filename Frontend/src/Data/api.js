@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from "axios";
 
-const apiURL = "http://localhost:5000/api/";
+const apiURL = "http://localhost:5000/HozlaApi/";
 
 export const singleFileUpload = async (data, collec, id) => {
   try {

@@ -205,15 +205,15 @@ export default function HozlaPrintRequestForm() {
   //takes the data drom the DB and gives inital values to the useState data, each time the page gets rendred/refreshed
   useEffect(() => {
     axios
-      // ! .get(`http://localhost:5000/hozlaAdminRequests/${params.formID}`)
-      .get(`http://localhost:5000/hozlaRequests/${params.formID}`)
+      // ! .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/${params.formID}`)
+      .get(`http://localhost:5000/HozlaApi/hozlaRequests/${params.formID}`)
       .then((response) => {
         // console.log(`the object data`);
         console.log(response.data);
         console.log(params.formID);
         // console.log(params.workName);
         axios
-          .get(`http://localhost:5000/hozlaAdminRequests/${params.formID}`)
+          .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/${params.formID}`)
           .then((response1) => {
             // console.log(`the object data`);
 
@@ -255,10 +255,10 @@ export default function HozlaPrintRequestForm() {
       });
 
     // axios
-    //   .get(`http://localhost:5000/AnnualInfoAdmin/`)
+    //   .get(`http://localhost:5000/HozlaApi/AnnualInfoAdmin/`)
     //   .then((response) => {
     //     if (response.data === null) {
-    //       axios.post(`http://localhost:5000/AnnualInfoAdmin/add`, adminData).then((res) => {
+    //       axios.post(`http://localhost:5000/HozlaApi/AnnualInfoAdmin/add`, adminData).then((res) => {
     //         setAdminData({
     //           ...adminData,
     //           countPrintInYear: response.data.countPrintInYear,
@@ -555,7 +555,10 @@ export default function HozlaPrintRequestForm() {
     console.log(adminRequestData);
     if (text === "הטופס עודכן") {
       axios
-        .post(`http://localhost:5000/hozlaAdminRequests/update/${params.formID}`, requestData)
+        .post(
+          `http://localhost:5000/HozlaApi/hozlaAdminRequests/update/${params.formID}`,
+          requestData
+        )
         .then((res1) => {
           // console.log(`the object data`);
           setData({
@@ -573,7 +576,7 @@ export default function HozlaPrintRequestForm() {
         });
     } else {
       axios
-        .post(`http://localhost:5000/hozlaAdminRequests/add`, requestData)
+        .post(`http://localhost:5000/HozlaApi/hozlaAdminRequests/add`, requestData)
         .then((res) => {
           setData({
             ...data,
@@ -600,7 +603,7 @@ export default function HozlaPrintRequestForm() {
     }
 
     // axios
-    //   .post(`http://localhost:5000/AnnualInfoAdmin/update`, adminRequestData)
+    //   .post(`http://localhost:5000/HozlaApi/AnnualInfoAdmin/update`, adminRequestData)
     //   .then((res) => {
     //     setData({
     //       ...data,

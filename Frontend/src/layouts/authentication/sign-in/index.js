@@ -233,14 +233,14 @@ function signIn() {
       holzlaRequest: signUpData.holzlaRequest,
     };
     axios
-      .post(`http://localhost:5000/api/signup`, newUser)
+      .post(`http://localhost:5000/HozlaApi/signup`, newUser)
       .then((res) => {
         console.log(`gotten new user from sign up`);
         console.log(`${res.data}`);
         console.log({ personalnumber: res.data.user.personalnumber });
         console.log(res.data.user.personalnumber);
         axios
-          .post(`http://localhost:5000/api/signin`, {
+          .post(`http://localhost:5000/HozlaApi/signin`, {
             personalnumber: res.data.user.personalnumber,
           })
           .then((r) => {
@@ -300,10 +300,10 @@ function signIn() {
     console.log(personalnumber);
 
     axios
-      .post(`http://localhost:5000/api/signin`, { personalnumber })
+      .post(`http://localhost:5000/HozlaApi/signin`, { personalnumber })
       .then((res) => {
         console.groupCollapsed("in the axios of the onSubmit");
-        console.log("http://localhost:5000/api/signin");
+        console.log("http://localhost:5000/HozlaApi/signin");
         console.group();
         console.log(res.data);
         console.log(res.data.user);
@@ -369,7 +369,7 @@ function signIn() {
   // hoger - need server code to make it work or fix bugs
   const passport = (event) => {
     axios
-      .get(`http://localhost:5000/auth/passportauth`)
+      .get(`http://localhost:5000/HozlaApi/auth/passportauth`)
       .then((response) => {
         console.log(response.data);
         setValues({
@@ -381,7 +381,7 @@ function signIn() {
         console.log(error);
         if (error.error === "NotInTheSystem") {
           axios
-            .get(`http://localhost:5000/auth/passportauth`)
+            .get(`http://localhost:5000/HozlaApi/auth/passportauth`)
             .then((response) => {
               console.log(response.data);
               setSignUpData({ ...signUpData, personalnumber: response.data.stam._json.cn });

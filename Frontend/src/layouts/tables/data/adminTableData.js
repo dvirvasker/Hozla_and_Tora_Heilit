@@ -79,7 +79,7 @@ export default function data() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/hozlaRequests/activeRequests`)
+      .get(`http://localhost:5000/HozlaApi/hozlaRequests/activeRequests`)
       .then((response) => {
         console.log(response.data);
         setRequestDB(response.data);
@@ -91,7 +91,7 @@ export default function data() {
   }, []);
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:5000/hozlaAdminRequests/`)
+  //     .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/`)
   //     .then((response) => {
   //       // console.log(`the object data`);
   //       console.log(response.data);

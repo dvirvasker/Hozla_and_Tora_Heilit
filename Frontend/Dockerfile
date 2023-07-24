@@ -1,6 +1,6 @@
 
 # Create image based on the official Node image from dockerhub
-FROM node
+FROM node:19.8.2
 
 # Create Hozla_App directory
 WORKDIR /Hozla_App

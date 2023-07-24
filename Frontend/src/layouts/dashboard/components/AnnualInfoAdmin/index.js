@@ -134,7 +134,7 @@ function AnnualInfoAdmin() {
   const year = new Date().getFullYear();
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/hozlaAdminRequests/getAnnualInfo/${year}`)
+      .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/getAnnualInfo/${year}`)
       .then((response) => {
         if (response !== undefined) {
           setFormData(response.data);
@@ -178,14 +178,14 @@ function AnnualInfoAdmin() {
         // console.log(`the object data`);
         // console.log(response.data);
 
-        // axios.get(`http://localhost:5000/hozlaAdminRequests/first/Doc`).then((res) => {
+        // axios.get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/first/Doc`).then((res) => {
         //   // console.log(`the object data`);
         //   console.log(getDaysDiff(res.data.createdAt.split("T")[0]));
 
         //   // change to 365
         //   if (getDaysDiff(res.data.createdAt.split("T")[0]) > 365) {
         //     axios
-        //       .post(`http://localhost:5000/hozlaAdminRequests/deleteAllDoc`)
+        //       .post(`http://localhost:5000/HozlaApi/hozlaAdminRequests/deleteAllDoc`)
         //       .then((delRespone) => {
         //         console.log(delRespone.data);
         //       })
@@ -206,7 +206,7 @@ function AnnualInfoAdmin() {
         // }
       });
     axios
-      .get(`http://localhost:5000/hozlaAdminRequests/getAllBeatsTypes/${year}`)
+      .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/getAllBeatsTypes/${year}`)
       .then((res) => {
         console.log(res.data);
         setPrintData({

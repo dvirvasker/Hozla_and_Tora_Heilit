@@ -45,7 +45,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Upload } from "antd-upload";
+// import { Upload } from "antd-upload";
 // import { multipleFilesUpload } from "../../data/api";
 
 import {
@@ -499,7 +499,7 @@ export default function HozlaPrintRequestForm() {
     // for (const key of Object.keys(files)) {
     //   formFilesData.append("files", files[key]);
     // }
-    axios.post("http://localhost:5000/api/multipleFiles", formFilesData, {}).then((res) => {
+    axios.post("http://localhost:5000/HozlaApi/multipleFiles", formFilesData, {}).then((res) => {
       console.log("from the file axios");
       console.log(res.data);
       const requestData = {
@@ -535,7 +535,7 @@ export default function HozlaPrintRequestForm() {
       };
       console.log(requestData);
       axios
-        .post(`http://localhost:5000/hozlaRequests/add`, requestData)
+        .post(`http://localhost:5000/HozlaApi/hozlaRequests/add`, requestData)
         .then((response) => {
           setData({
             ...data,

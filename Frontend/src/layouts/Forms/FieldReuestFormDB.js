@@ -97,7 +97,7 @@ const FieldReuestFormDB = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/hozlaRequests/${params.formID}`)
+      .get(`http://localhost:5000/HozlaApi/hozlaRequests/${params.formID}`)
       .then((response) => {
         // console.log(`the object data`);
         console.log(response.data);
@@ -125,7 +125,7 @@ const FieldReuestFormDB = () => {
 
   const getFiles = () => {
     axios
-      .get(`http://localhost:5000/api/getMultipleFiles/${formData.files_id}`)
+      .get(`http://localhost:5000/HozlaApi/getMultipleFiles/${formData.files_id}`)
       .then((response) => {
         setFilesFromDB(response.data.files);
         console.log(`files: ${response.data}`);
@@ -152,7 +152,7 @@ const FieldReuestFormDB = () => {
     const newUrlPath = urlPath.slice(8);
     // console.log(`Frontend ${newUrlPath}`);
     axios
-      .get(`http://localhost:5000/api/downloadPDFFile/${newUrlPath}`, { responseType: "blob" })
+      .get(`http://localhost:5000/HozlaApi/downloadPDFFile/${newUrlPath}`, { responseType: "blob" })
       .then((res) => {
         FileDownload(res.data, fileName);
       });
@@ -272,7 +272,7 @@ const FieldReuestFormDB = () => {
     console.log(newStatus);
 
     axios
-      .post(`http://localhost:5000/hozlaRequests/statusUpdate/${params.formID}`, {
+      .post(`http://localhost:5000/HozlaApi/hozlaRequests/statusUpdate/${params.formID}`, {
         status: newStatus,
       })
       .then((response) => {
@@ -303,7 +303,10 @@ const FieldReuestFormDB = () => {
       fullNameReciver: data.fullNameReciver,
     };
     axios
-      .post(`http://localhost:5000/hozlaRequests/updateNameReciver/${params.formID}`, NameReciver)
+      .post(
+        `http://localhost:5000/HozlaApi/hozlaRequests/updateNameReciver/${params.formID}`,
+        NameReciver
+      )
       .then((response) => {
         // console.groupCollapsed(`handleStatusChange -------- Axios.then`);
         // console.log(response.data);

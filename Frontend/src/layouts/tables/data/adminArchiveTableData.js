@@ -99,7 +99,7 @@ export default function data() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/hozlaRequests/archivedRequests`)
+      .get(`http://localhost:5000/HozlaApi/hozlaRequests/archivedRequests`)
       .then((response) => {
         console.log(response.data);
         setRequestDB(response.data);
@@ -111,7 +111,7 @@ export default function data() {
           ) {
             if (element.files_id !== undefined) {
               axios
-                .delete(`http://localhost:5000/api/deleteMultiFiles/${element.files_id}`)
+                .delete(`http://localhost:5000/HozlaApi/deleteMultiFiles/${element.files_id}`)
                 .then((delfRespone) => {
                   console.log(delfRespone.data);
                 })
@@ -122,7 +122,7 @@ export default function data() {
               console.log("filesid");
             }
             axios
-              .delete(`http://localhost:5000/hozlaRequests/${element._id}`)
+              .delete(`http://localhost:5000/HozlaApi/hozlaRequests/${element._id}`)
               .then((delRespone) => {
                 console.log(delRespone.data);
               })
@@ -136,7 +136,7 @@ export default function data() {
             element.typeRequest === "ToraHeilit"
           ) {
             axios
-              .delete(`http://localhost:5000/hozlaRequests/${element._id}`)
+              .delete(`http://localhost:5000/HozlaApi/hozlaRequests/${element._id}`)
               .then((delRespone) => {
                 console.log(delRespone.data);
               })
@@ -155,7 +155,7 @@ export default function data() {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:5000/hozlaAdminRequests/`)
+  //     .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/`)
   //       .then((response) => {
   //         // console.log(`the object data`);
   //         console.log(response.data);
@@ -177,7 +177,7 @@ export default function data() {
   // }, []);
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:5000/hozlaRequests/`)
+  //     .get(`http://localhost:5000/HozlaApi/hozlaRequests/`)
   //     .then((response) => {
   //       console.log(response.data);
   //       setRequestDB(response.data);

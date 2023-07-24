@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 // !
-app.use("/uploads", express.static("uploads")); // to acsses the uploades folder in the server
+app.use("/HozlaApi/uploads", express.static("uploads")); // to acsses the uploades folder in the server
 // Configure Mongo
 // const dbUrl = "mongodb://localhost/HozlaDB";
 const dbUrl = process.env.DB_URL;
@@ -42,8 +42,8 @@ mongoose
 //user routes
 const authRoutes = require("./routes/authentication/auth");
 const userRoutes = require("./routes/authentication/users");
-app.use("/api", authRoutes);
-app.use("/api", userRoutes);
+app.use("/HozlaApi", authRoutes);
+app.use("/HozlaApi", userRoutes);
 
 //* file uploader Routes
 // const fileuploaderRoutes = require("./routes/fileuploader100/fileuploader");
@@ -51,11 +51,11 @@ app.use("/api", userRoutes);
 
 //Hozla Requests routes for Client
 const hozlaRequestsRouter = require("./routes/hozlaRequests");
-app.use("/hozlaRequests", hozlaRequestsRouter);
+app.use("/HozlaApi/hozlaRequests", hozlaRequestsRouter);
 
 // Hozla Requests routes for admin
 const hozlaAdminRequestsRouter = require("./routes/hozlaAdminRequests");
-app.use("/hozlaAdminRequests", hozlaAdminRequestsRouter);
+app.use("/HozlaApi/hozlaAdminRequests", hozlaAdminRequestsRouter);
 
 // //user routes
 // const authRoutes = require("./routes/authentication/auth");
@@ -65,15 +65,15 @@ app.use("/hozlaAdminRequests", hozlaAdminRequestsRouter);
 
 // upload files
 const fileuploaderRoutes = require("./routes/fileuploader/fileuploader");
-app.use("/api", fileuploaderRoutes);
+app.use("/HozlaApi", fileuploaderRoutes);
 
 // Annual Info Admin
 const AnnualInfoAdmin = require("./routes/AnnualInfoAdmin");
-app.use("/AnnualInfoAdmin", AnnualInfoAdmin);
+app.use("/HozlaApi/AnnualInfoAdmin", AnnualInfoAdmin);
 
 // Tora Heilit
 const toraHeilit = require("./routes/toraHeilit");
-app.use("/toraHeilit", toraHeilit);
+app.use("/HozlaApi/toraHeilit", toraHeilit);
 
 if (process.env.NODE_ENV === "production") {
   //set static folder

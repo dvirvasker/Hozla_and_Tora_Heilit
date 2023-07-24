@@ -119,7 +119,7 @@ export default function PrintInfoRequestFormDB() {
   //takes the data drom the DB and gives inital values to the useState data, each time the page gets rendred/refreshed
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/hozlaAdminRequests/${params.formID}`)
+      .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/${params.formID}`)
       .then((response) => {
         // console.log(`the object data`);
 
@@ -295,7 +295,7 @@ export default function PrintInfoRequestFormDB() {
   //     console.log(requestData);
 
   //     axios
-  //         .post(`http://localhost:5000/hozlaAdminRequests/add`, requestData)
+  //         .post(`http://localhost:5000/HozlaApi/hozlaAdminRequests/add`, requestData)
   //         .then((res) => {
   //             setData({
   //                 ...data,

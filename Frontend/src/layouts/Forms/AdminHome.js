@@ -85,7 +85,7 @@ function Dashboard() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/hozlaRequests/getCountStatus`)
+      .get(`http://localhost:5000/HozlaApi/hozlaRequests/getCountStatus`)
       .then((responseStatus) => {
         console.log(responseStatus.data);
         setRequestDB(responseStatus.data);
@@ -103,7 +103,7 @@ function Dashboard() {
       });
     const year = new Date().getFullYear();
     axios
-      .get(`http://localhost:5000/hozlaAdminRequests/getAnafPrintCount/${year}`)
+      .get(`http://localhost:5000/HozlaApi/hozlaAdminRequests/getAnafPrintCount/${year}`)
       .then((responseAnaf) => {
         console.log(responseAnaf.data);
         setAnaf({

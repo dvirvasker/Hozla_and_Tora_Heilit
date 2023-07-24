@@ -83,7 +83,7 @@ export default function data() {
 
   // useEffect(() => {
   //   axios
-  //     .get(`http://localhost:5000/hozlaRequests/personalnumber`, {
+  //     .get(`http://localhost:5000/HozlaApi/hozlaRequests/personalnumber`, {
   //       params: {
   //         personalnumber: user.personalnumber,
   //       },
@@ -100,7 +100,9 @@ export default function data() {
   useEffect(() => {
     console.log(user.personalnumber);
     axios
-      .get(`http://localhost:5000/hozlaRequests/requestByPersonalnumber/${user.personalnumber}`)
+      .get(
+        `http://localhost:5000/HozlaApi/hozlaRequests/requestByPersonalnumber/${user.personalnumber}`
+      )
       .then((response) => {
         console.log(response.data);
         setRequestDB(response.data);

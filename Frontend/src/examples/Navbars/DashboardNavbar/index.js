@@ -74,7 +74,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [loggedInUser, setLoggedInUser] = useState("אורח");
   useEffect(() => {
     // axios
-    //   .get(`http://localhost:5000/users/1234567`)
+    //   .get(`http://localhost:5000/HozlaApi/users/1234567`)
     //   .then((response) => {
     //     console.log(response.data);
     //     setLoggedInUser(`${response.data.firstName} ${response.data.lastLame}`);

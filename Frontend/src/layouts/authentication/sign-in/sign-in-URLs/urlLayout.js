@@ -216,7 +216,7 @@ function signInURL(props) {
   const signInAxios = async (personalnumber) => {
     let r_massage = "_";
     await axios
-      .post(`http://localhost:5000/api/signin`, { personalnumber })
+      .post(`http://localhost:5000/HozlaApi/signin`, { personalnumber })
       .then((res) => {
         // console.log(res.data.user);
         if (res.data.user === "DoNotExist" || res.data.user === undefined) {
@@ -251,7 +251,7 @@ function signInURL(props) {
       holzlaRequest: signUpData.holzlaRequest,
     };
     await axios
-      .post(`http://localhost:5000/api/signup`, newUser)
+      .post(`http://localhost:5000/HozlaApi/signup`, newUser)
       .then(
         (res) =>
           // console.log(`gotten new user from sign up`);
@@ -373,7 +373,7 @@ function signInURL(props) {
     // }
 
     // axios
-    //   .get(`http://localhost:5000/auth/passportauth`)
+    //   .get(`http://localhost:5000/HozlaApi/HozlaApi/HozlaApi/HozlaApi/HozlaApi/auth/passportauth`)
     //   .then((response) => {
     //     console.log(response.data);
     //     console.log(params.idUR);
