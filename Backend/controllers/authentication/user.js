@@ -32,6 +32,12 @@ exports.find = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+exports.getAllUsers = (req, res) => {
+  User.find()
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
+};
+
 exports.update = async (req, res) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,

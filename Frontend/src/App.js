@@ -79,6 +79,7 @@ import SignUpAdmin from "layouts/authentication/sign-up/signUpAdmin";
 import SignUpUser from "layouts/authentication/sign-up/signUpUser";
 //!---------------------------------------------
 
+import UserManagement from "layouts/tables/userManagement";
 import AdminFeildPrintInfoFormDB from "layouts/Forms/AdminFeildPrintInfoFormDB";
 import HozlaAdminPrintInfoForm from "layouts/Forms/HozlaAdminPrintInfoForm";
 import ToraHeilitFieldReuestFormDB from "layouts/Forms/ToraHeilitFieldReuestFormDB";
@@ -282,6 +283,8 @@ export default function App() {
                   <Route path="/" element={<Navigate to="/AdminHome" />} />
                   {/* <Route path="/" element={<Navigate to="/authentication/sign-in" />} /> */}
                   <Route path="/Error404" element={<Error404 />} />
+
+                  <Route path="/userManagement" element={<UserManagement />} />
                   {/* <Route path="/adminForm" element={<HozlaAdminPrintInfoForm />} /> */}
                   {/* <Route path="/adminFieldReuestFormDB" element={<AdminFieldReuestFormDB />} /> */}
                   <Route path="/RequestForm">

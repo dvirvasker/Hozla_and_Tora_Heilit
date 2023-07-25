@@ -53,6 +53,7 @@ import ToraHeilitPrintRequestForm from "layouts/Forms/ToraHeilitPrintRequestForm
 import ToraHeilitVolumeAdmin from "layouts/Forms/ToraHeilitVolumeAdmin";
 import AdminArchiveTable from "layouts/tables/adminArchiveTable";
 import ManagementHoztla from "layouts/tables/adminManagementTable";
+import UserManagement from "layouts/tables/userManagement";
 
 // import HozlaAdminPrintInfoForm from "layouts/Forms/HozlaAdminPrintInfoForm";
 // import AdminFieldReuestFormDB from "layouts/Forms/adminFieldReuestFormDB";
@@ -89,7 +90,14 @@ const AdminRoutes = [
     route: "/AdminHome",
     component: <AdminHome />,
   },
-
+  {
+    type: "collapse",
+    name: "ניהול משתמשים",
+    key: "userManagement",
+    icon: <Icon fontSize="small">contacts</Icon>,
+    route: "/userManagement",
+    component: <UserManagement />,
+  },
   // {
   //   type: "collapse",
   //   name: "טופס הוצל''א",
