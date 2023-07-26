@@ -38,6 +38,14 @@ exports.getAllUsers = (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 };
 
+exports.getAllMenagmentUsers = (req, res) => {
+  User.find({ $or: [{ admin: "1" }, { admin: "2" }] })
+    .sort({ admin: -1 })
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
+  // console.log(req.body);
+};
+
 exports.update = async (req, res) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,

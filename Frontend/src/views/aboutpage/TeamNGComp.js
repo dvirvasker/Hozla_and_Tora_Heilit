@@ -2,36 +2,36 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 
 import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
+import Switch from "@mui/material/Switch";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
+import MDInput from "components/MDInput";
+import MDTypography from "components/MDTypography";
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // reactstrap components
+import teamNGogo from "assets/images/NewNGlogoWhite.svg";
 import {
   Button,
   ButtonGroup,
+  CardBody,
   // Card,
   CardHeader,
-  CardBody,
   CardTitle,
-  Row,
-  Container,
   Col,
   Collapse,
+  Container,
+  Row,
 } from "reactstrap";
-import teamNGogo from "assets/images/NewNGlogoWhite.svg";
 
 function TeamNGComp() {
   return (
@@ -58,8 +58,7 @@ function TeamNGComp() {
       <MDBox pt={4} pb={3} px={3}>
         <MDTypography variant="h5" fontWeight="medium" mt={1}>
           צוות NG הוא צוות שעוסק בפיתוח מערכות במפקדת קצין הטכנולוגיה והאחזקה הראשי. הצוות ממוקם
-          במדור NG בענף תו"ן ומפתח מערכות ייעודיות לחיל הטכנולוגיה והאחזקה בסביבת הWeb בשיתוף פעולה
-          עם רפ"ט.
+          במדור NG בענף תו"ן ומפתח מערכות ייעודיות לחיל הטכנולוגיה והאחזקה בסביבת הWeb .
         </MDTypography>
       </MDBox>
     </Card>

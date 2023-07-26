@@ -22,17 +22,17 @@ Coded by www.creative-tim.com
 // @mui material components
 import Icon from "@mui/material/Icon";
 // Material Dashboard 2 React components
+import MDBadge from "components/MDBadge";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDBadge from "components/MDBadge";
 // import MDAvatar from "components/MDAvatar";
-import MDProgress from "components/MDProgress";
-import { useEffect, useState } from "react";
+import Switch from "@mui/material/Switch";
+import { authenticate, isAuthenticated, signin, signout, updateRefreshCount } from "auth/index";
 import axios from "axios";
 import MDButton from "components/MDButton";
+import MDProgress from "components/MDProgress";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Switch from "@mui/material/Switch";
-import { authenticate, isAuthenticated, signin, updateRefreshCount } from "auth/index";
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -83,7 +83,7 @@ export default function data() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/HozlaApi/getAllUsers`)
+      .get(`http://localhost:5000/HozlaApi/getAllMenagmentUsers`)
       .then((response) => {
         console.log(response.data);
         setRequestDB(response.data);
@@ -165,16 +165,16 @@ export default function data() {
     let color = "mekatnar";
     if (type === "0") {
       typeName = "הוצל''א";
-      color = "success";
-    } else if (type === "1") {
-      typeName = "מנהל מערכת ראשי";
       color = "mekatnar";
     } else if (type === "2") {
+      typeName = "מנהל מערכת ראשי";
+      color = "info";
+    } else if (type === "1") {
       typeName = "מנהל מערכת";
-      color = "mekatnar";
+      color = "warning";
     } else if (type === "3") {
       typeName = "תורה חילית";
-      color = "info";
+      color = "mekatnar";
     }
     return [typeName, color];
   };
@@ -182,26 +182,103 @@ export default function data() {
   //   parseInt()
   // }
 
-  const dbRows = requestDB.map((hozla, index) => ({
-    fileID: hozla._id,
-    personalNumber: hozla.personalnumber,
-    firstName: hozla.firstName,
-    lastName: hozla.lastLame,
+  const dbRows = requestDB.map((mangmentUser, index) => ({
+    // fileID: mangmentUser._id,
+    personalNumber: mangmentUser.personalnumber,
+    firstName: mangmentUser.firstName,
+    lastName: mangmentUser.lastLame,
     userType: (
       <MDBadge
-        badgeContent={setTypeRequest(hozla.admin)[0]}
-        color={setTypeRequest(hozla.admin)[1]}
+        badgeContent={setTypeRequest(mangmentUser.admin)[0]}
+        color={setTypeRequest(mangmentUser.admin)[1]}
         size="sm"
         container
       />
     ),
-    approved: (
-      <Switch
-        checked={hozla.approved}
-        onChange={handleChange}
-        inputProps={{ "aria-label": "controlled" }}
-      />
-    ),
+    approved:
+      mangmentUser.approved === false ? (
+        <MDBox
+          px={5}
+          sx={{
+            display: "inline-flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            alignContent: "space-between",
+          }}
+        >
+          <MDBox mr={2}>
+            <MDButton
+              variant="gradient"
+              color="success"
+              onClick={() => {
+                axios
+                  .put(`http://localhost:5000/HozlaApi/user/update/${mangmentUser._id}`, {
+                    approved: true,
+                  })
+                  .then((response) => {
+                    window.location.reload(false);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }}
+              circular="true"
+              iconOnly="true"
+              size="medium"
+            >
+              <Icon>done</Icon>
+            </MDButton>
+          </MDBox>
+          <MDBox>
+            <MDButton
+              item
+              variant="gradient"
+              color="error"
+              onClick={() => {
+                axios
+                  .post(`http://localhost:5000/HozlaApi/user/remove/${mangmentUser._id}`)
+                  .then((response) => {
+                    if (mangmentUser._id === user.user._id) {
+                      signout();
+                    }
+                    window.location.reload(false);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }}
+              circular="true"
+              iconOnly="true"
+              size="medium"
+            >
+              <Icon>clear</Icon>
+            </MDButton>
+          </MDBox>
+        </MDBox>
+      ) : (
+        <MDButton
+          variant="gradient"
+          color="error"
+          onClick={() => {
+            axios
+              .post(`http://localhost:5000/HozlaApi/user/remove/${mangmentUser._id}`)
+              .then((response) => {
+                if (mangmentUser._id === user.user._id) {
+                  signout();
+                }
+                window.location.reload(false);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }}
+          circular="true"
+          iconOnly="true"
+          size="medium"
+        >
+          <Icon>clear</Icon>
+        </MDButton>
+      ),
   }));
 
   console.log(`isError ${isError}`);
@@ -210,19 +287,19 @@ export default function data() {
     columns:
       user.user.admin === "1"
         ? [
-            { Header: "id", accessor: "fileID", align: "center" },
+            // { Header: "id", accessor: "fileID", align: "center" },
+            { Header: "מספר אישי", accessor: "personalNumber", align: "center" },
+            { Header: "שם פרטי", accessor: "firstName", align: "center" },
+            { Header: "שם משפחה", accessor: "lastName", align: "center" },
+            { Header: "סוג משתמש", accessor: "userType", align: "center" },
+          ]
+        : [
+            // { Header: "id", accessor: "fileID", align: "center" },
             { Header: "מספר אישי", accessor: "personalNumber", align: "center" },
             { Header: "שם פרטי", accessor: "firstName", align: "center" },
             { Header: "שם משפחה", accessor: "lastName", align: "center" },
             { Header: "סוג משתמש", accessor: "userType", align: "center" },
             { Header: "אישור מנהל", accessor: "approved", align: "center" },
-          ]
-        : [
-            { Header: "id", accessor: "fileID", align: "center" },
-            { Header: "מספר אישי", accessor: "personalNumber", align: "center" },
-            { Header: "שם פרטי", accessor: "firstName", align: "center" },
-            { Header: "שם משפחה", accessor: "lastName", align: "center" },
-            { Header: "סוג משתמש", accessor: "userType", align: "center" },
           ],
 
     rows: dbRows,

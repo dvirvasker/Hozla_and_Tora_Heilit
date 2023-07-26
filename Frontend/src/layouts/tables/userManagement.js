@@ -20,31 +20,31 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
-import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React example components
+import Footer from "examples/Footer";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
+import { Dialog, DialogContent } from "@mui/material";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 import regulsrUserRequestsTableData from "layouts/tables/data/regulsrUserRequestsTableData";
 import userManagementData from "layouts/tables/data/userManagementData";
-import { Dialog, DialogContent } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import { CardBody, Col, Container, Form, FormGroup, FormText, Input, Label, Row } from "reactstrap";
+import { authenticate, isAuthenticated, signin } from "auth/index";
 import axios from "axios";
 import { Navigate, Outlet } from "react-router-dom";
-import { signin, authenticate, isAuthenticated } from "auth/index";
+import { CardBody, Col, Container, Form, FormGroup, FormText, Input, Label, Row } from "reactstrap";
 
 const adminManagementTable = () => {
   const tableTittle = "ניהול משתמשים";
@@ -129,7 +129,7 @@ const adminManagementTable = () => {
                 </MDTypography>
               ) : (
                 <MDTypography mx={30} variant="h3" color="mekatnar" textGradient={true}>
-                  לא קיימות בקשות בחשבונך
+                  לא קיימים משתמשים במערכת
                 </MDTypography>
               )}
             </MDBox>
