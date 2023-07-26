@@ -1,3 +1,5 @@
+/* eslint-disable no-else-return */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-duplicates */
@@ -213,6 +215,11 @@ function SignUpUser() {
       ErrorReason.push("אנא הכנס מספר אישי");
       // toast.error(ErrorReason);
     }
+    if (signUpData.personalnumber.length >= 8) {
+      flag = false;
+      ErrorReason.push("  אנא וודא כי המספר האישי תקין");
+      // toast.error(ErrorReason);
+    }
     if (signUpData.firstName === "") {
       flag = false;
       ErrorReason.push("אנא הכנס שם פרטי");
@@ -231,9 +238,9 @@ function SignUpUser() {
     if (flag !== true) {
       ErrorReason.forEach((reason) => {
         toast.error(reason);
-        return false;
         // setData({ ...data, loading: false, successmsg: false, error: true });
       });
+      return false;
     } else {
       return true;
       // setData({ ...data, loading: false, successmsg: true, error: false });
@@ -374,6 +381,15 @@ function SignUpUser() {
                 Terms and Conditions
               </MDTypography>
             </MDBox> */}
+          {signUpData.userType === "0" ? (
+            <MDTypography textGradient variant="caption" fontWeight="medium" color="error">
+              {` *שים לב, שרק חיילי מפקדת מקטנא"ר יכולים להירשם למערכת הוצל"א`}
+            </MDTypography>
+          ) : signUpData.userType === "3" ? (
+            <MDTypography textGradient variant="caption" fontWeight="medium" color="error">
+              {` *שים לב, שרק חיילים שלא שייכים למפקדת מקטנא"ר יכולים להירשם למערכת תורה חילית`}
+            </MDTypography>
+          ) : null}
           <MDBox mt={4} mb={1}>
             <MDButton variant="gradient" color="mekatnar" type="submit" fullWidth>
               הירשם

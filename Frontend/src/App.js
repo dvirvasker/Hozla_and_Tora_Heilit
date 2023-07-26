@@ -79,10 +79,10 @@ import SignUpAdmin from "layouts/authentication/sign-up/signUpAdmin";
 import SignUpUser from "layouts/authentication/sign-up/signUpUser";
 //!---------------------------------------------
 
-import UserManagement from "layouts/tables/userManagement";
 import AdminFeildPrintInfoFormDB from "layouts/Forms/AdminFeildPrintInfoFormDB";
 import HozlaAdminPrintInfoForm from "layouts/Forms/HozlaAdminPrintInfoForm";
 import ToraHeilitFieldReuestFormDB from "layouts/Forms/ToraHeilitFieldReuestFormDB";
+import UserManagement from "layouts/tables/userManagement";
 
 import ToraHeilitVolumeAdmin from "layouts/Forms/ToraHeilitVolumeAdmin";
 
@@ -95,6 +95,8 @@ export default function App() {
   const params = useParams();
 
   const [user, setUser] = useState(isAuthenticated());
+  console.log("User in App");
+  console.log(user);
   const [isAdmin, setIsAdmin] = useState(!(user.admin === "0"));
   // console.log("User in App");
   // console.log(user);

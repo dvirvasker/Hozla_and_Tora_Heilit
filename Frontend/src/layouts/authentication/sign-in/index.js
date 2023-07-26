@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-duplicates */
@@ -210,17 +211,18 @@ function signIn() {
     let flag = true;
     const ErrorReason = [];
 
-    if (signInData.personalnumber === "" && signInData.personalnumber.length < 8) {
+    if (signInData.personalnumber === "" && signInData.personalnumber.length >= 8) {
       flag = false;
-      ErrorReason.push("אנא הכנס מספר אישי");
+      ErrorReason.push("אנא הכנס מספר אישי תקין");
       // toast.error(ErrorReason);
     }
     if (flag !== true) {
       ErrorReason.forEach((reason) => {
         toast.error(reason);
-        return false;
         // setData({ ...data, loading: false, successmsg: false, error: true });
       });
+
+      return false;
     } else {
       return true;
       // setData({ ...data, loading: false, successmsg: true, error: false });

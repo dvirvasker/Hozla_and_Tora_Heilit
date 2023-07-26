@@ -212,6 +212,11 @@ function SignUpAdmin() {
       ErrorReason.push("אנא הכנס מספר אישי");
       // toast.error(ErrorReason);
     }
+    if (signUpData.personalnumber.length >= 8) {
+      flag = false;
+      ErrorReason.push("  אנא וודא כי המספר האישי תקין");
+      // toast.error(ErrorReason);
+    }
     if (signUpData.firstName === "") {
       flag = false;
       ErrorReason.push("אנא הכנס שם פרטי");
@@ -225,13 +230,13 @@ function SignUpAdmin() {
     if (flag !== true) {
       ErrorReason.forEach((reason) => {
         toast.error(reason);
-        return false;
+
         // setData({ ...data, loading: false, successmsg: false, error: true });
       });
-    } else {
-      return true;
-      // setData({ ...data, loading: false, successmsg: true, error: false });
+      return false;
     }
+    return true;
+    // setData({ ...data, loading: false, successmsg: true, error: false });
   };
 
   const SendFormData = async (event) => {

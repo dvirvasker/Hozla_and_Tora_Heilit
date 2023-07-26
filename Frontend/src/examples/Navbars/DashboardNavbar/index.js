@@ -18,20 +18,20 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-router components
-import { useLocation, Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
 // @material-ui core components
 import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
+import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
-import Icon from "@mui/material/Icon";
+import Toolbar from "@mui/material/Toolbar";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -45,26 +45,28 @@ import NotificationItem from "examples/Items/NotificationItem";
 import {
   navbar,
   navbarContainer,
-  navbarRow,
   navbarIconButton,
   navbarMobileMenu,
+  navbarRow,
 } from "examples/Navbars/DashboardNavbar/styles";
 
 // Material Dashboard 2 React context
+import soldierAvatar from "assets/images/soldier.png";
 import {
-  useMaterialUIController,
-  setTransparentNavbar,
   setMiniSidenav,
   setOpenConfigurator,
+  setTransparentNavbar,
+  useMaterialUIController,
 } from "context";
-import soldierAvatar from "assets/images/soldier.png";
 
-import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
-import axios from "axios";
 import { authenticate, isAuthenticated, signout } from "auth/index";
+import axios from "axios";
+import MDAvatar from "components/MDAvatar";
+import MDTypography from "components/MDTypography";
+// console.log("------------------");
+// console.log(isAuthenticated());
+// console.log("------------------");
 const { user } = isAuthenticated();
-
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
@@ -209,7 +211,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 <Icon sx={iconsStyle}>settings</Icon>
               </IconButton>
               {/* {/* <Link to="/userRequestsTable"> */}
-              {user ? (
+              {/* {user ? (
                 <IconButton
                   size="small"
                   // disableRipple
@@ -222,7 +224,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 >
                   <Icon sx={iconsStyle}>logout</Icon>
                 </IconButton>
-              ) : null}
+              ) : null} */}
               {/* </Link> */}
               {/* {renderMenu()} */}
             </MDBox>
