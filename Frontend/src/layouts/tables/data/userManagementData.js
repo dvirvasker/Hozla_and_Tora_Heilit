@@ -32,6 +32,7 @@ import axios from "axios";
 import MDButton from "components/MDButton";
 import { Link, useParams } from "react-router-dom";
 import Switch from "@mui/material/Switch";
+import { authenticate, isAuthenticated, signin, updateRefreshCount } from "auth/index";
 
 // Images
 // import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -55,6 +56,8 @@ export default function data() {
   const [requestDB, setRequestDB] = useState([]);
   const [isInfoPressed, setIsInfoPressed] = useState(false);
   const [pressedID, setpressedID] = useState("");
+
+  const [user, setUser] = useState(isAuthenticated());
   const textPlaceHolderInputs = [
     "יחידה",
     "ענף",
@@ -204,14 +207,23 @@ export default function data() {
   console.log(`isError ${isError}`);
   return {
     //* the tables headers
-    columns: [
-      { Header: "id", accessor: "fileID", align: "center" },
-      { Header: "מספר אישי", accessor: "personalNumber", align: "center" },
-      { Header: "שם פרטי", accessor: "firstName", align: "center" },
-      { Header: "שם משפחה", accessor: "lastName", align: "center" },
-      { Header: "סוג משתמש", accessor: "userType", align: "center" },
-      { Header: "אישור מנהל", accessor: "approved", align: "center" },
-    ],
+    columns:
+      user.user.admin === "1"
+        ? [
+            { Header: "id", accessor: "fileID", align: "center" },
+            { Header: "מספר אישי", accessor: "personalNumber", align: "center" },
+            { Header: "שם פרטי", accessor: "firstName", align: "center" },
+            { Header: "שם משפחה", accessor: "lastName", align: "center" },
+            { Header: "סוג משתמש", accessor: "userType", align: "center" },
+            { Header: "אישור מנהל", accessor: "approved", align: "center" },
+          ]
+        : [
+            { Header: "id", accessor: "fileID", align: "center" },
+            { Header: "מספר אישי", accessor: "personalNumber", align: "center" },
+            { Header: "שם פרטי", accessor: "firstName", align: "center" },
+            { Header: "שם משפחה", accessor: "lastName", align: "center" },
+            { Header: "סוג משתמש", accessor: "userType", align: "center" },
+          ],
 
     rows: dbRows,
     dbError: isError,
