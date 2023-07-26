@@ -125,7 +125,7 @@ function SignUpAdmin() {
         textAlign="center"
       >
         <MDTypography variant="h1" fontWeight="medium" color="white" mt={1}>
-          נרשמתה בהצלחה למערכת, שים לב כי תוכל להתחבר רק לאחר אישור מנהל המערכת
+          נרשמת בהצלחה למערכת, שים לב כי תוכל להתחבר רק לאחר אישור מנהל המערכת
         </MDTypography>
         <MDButton onClick={handleCloseSuccsecModal} variant="gradient" color="light">
           סגירה
@@ -214,7 +214,7 @@ function SignUpAdmin() {
     }
     if (signUpData.personalnumber.length >= 8) {
       flag = false;
-      ErrorReason.push("  אנא וודא כי המספר האישי תקין");
+      ErrorReason.push("אנא וודא כי המספר האישי תקין");
       // toast.error(ErrorReason);
     }
     if (signUpData.firstName === "") {

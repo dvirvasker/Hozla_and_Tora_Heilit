@@ -359,9 +359,9 @@ export default function App() {
                 <Route path="/authentication/admin/sign-up" element={<SignUpAdmin />} />
                 {/* <Route path="/Error404" element={<Error404 />} /> */}
                 <Route path="/about-us" element={<AboutPage />} />
-                {/* <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
-                <Route path="*" element={<Navigate to="/authentication/sign-in" />} /> */}
-                <Route path="/" element={<Navigate to="/about-us" />} />
+                <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
+                {/* <Route path="*" element={<Navigate to="/authentication/sign-in" />} /> */}
+                {/* <Route path="/" element={<Navigate to="/about-us" />} /> */}
                 {/* <Route path="*" element={<Navigate to="/Error404" />} /> */}
               </Routes>
             )}

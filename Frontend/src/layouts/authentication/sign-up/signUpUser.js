@@ -128,7 +128,7 @@ function SignUpUser() {
         textAlign="center"
       >
         <MDTypography variant="h1" fontWeight="medium" color="white" mt={1}>
-          נרשמתה בהצלחה למערכת
+          נרשמת בהצלחה למערכת
         </MDTypography>
         <MDButton onClick={handleCloseSuccsecModal} variant="gradient" color="light">
           מעבר לאתר
@@ -217,7 +217,7 @@ function SignUpUser() {
     }
     if (signUpData.personalnumber.length >= 8) {
       flag = false;
-      ErrorReason.push("  אנא וודא כי המספר האישי תקין");
+      ErrorReason.push("אנא וודא כי המספר האישי תקין");
       // toast.error(ErrorReason);
     }
     if (signUpData.firstName === "") {

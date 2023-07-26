@@ -328,7 +328,7 @@ function signIn() {
             </MDBox>
             <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
-                עוד לא נרשמתה?{" "}
+                עוד לא נרשמת?{" "}
                 <MDTypography
                   component={Link}
                   to="/authentication/sign-up"
