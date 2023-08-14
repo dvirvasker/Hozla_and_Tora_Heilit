@@ -75,7 +75,7 @@ export default function data() {
   // const bindingTypes = ["הידוק", "ספירלה", "חירור", "אחר"];
   // const copyTypes = ["שחור לבן דו צדדי", "צבעוני יחיד", "צבעוני דו צדדי", "שחור לבן יחיד"];
   // const pageTypes = { A4: "A4", A3: "A3", A4b: "A4 בריסטול", A3b: "A3 בריסטול" };
-  const MINUTE_MS = 100000;
+  const MINUTE_MS = 1000;
 
   useEffect(() => {
     axios
@@ -88,6 +88,19 @@ export default function data() {
         console.log(error);
         setIsError(true);
       });
+    const interval = setInterval(() => {
+      axios
+        .get(`http://localhost:5000/HozlaApi/hozlaRequests/activeRequests`)
+        .then((response) => {
+          console.log(response.data);
+          setRequestDB(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsError(true);
+        });
+    }, 600000);
+    return () => clearInterval(interval);
   }, []);
   // useEffect(() => {
   //   axios

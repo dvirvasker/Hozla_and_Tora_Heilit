@@ -212,7 +212,7 @@ function SignUpAdmin() {
       ErrorReason.push("אנא הכנס מספר אישי");
       // toast.error(ErrorReason);
     }
-    if (signUpData.personalnumber.length >= 8) {
+    if (!(signUpData.personalnumber.length === 7 || signUpData.personalnumber.length === 9)) {
       flag = false;
       ErrorReason.push("אנא וודא כי המספר האישי תקין");
       // toast.error(ErrorReason);
@@ -252,17 +252,26 @@ function SignUpAdmin() {
     await axios
       .post(`http://localhost:5000/HozlaApi/signup`, newUser)
       .then((res) => {
-        console.log(`gotten new user from sign up`);
-        console.log(`${res.data}`);
-        console.log({ personalnumber: res.data.user.personalnumber });
-        console.log(res.data.user.personalnumber);
+        // console.log(`gotten new user from sign up`);
+        // console.log(`${res.data}`);
+        // console.log({ personalnumber: res.data.user.personalnumber });
+        // console.log(res.data.user.personalnumber);
         // authenticate(res.data);
-        setSignUpData({ ...signUpData, loading: false, error: false, successmsg: true });
-        const count = parseInt(localStorage.getItem("RefreshCount"), 10) + 1;
-        updateRefreshCount(count);
+        if (res.data.user === "Exist") {
+          setSignUpData({
+            ...signUpData,
+            loading: false,
+            error: true,
+            errortype: "משתמש כבר קיים במערכת",
+          });
+        } else {
+          setSignUpData({ ...signUpData, loading: false, error: false, successmsg: true });
+          const count = parseInt(localStorage.getItem("RefreshCount"), 10) + 1;
+          updateRefreshCount(count);
+        }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setSignUpData({ ...signUpData, loading: false, error: true, successmsg: false });
       });
   };
@@ -380,6 +389,18 @@ function SignUpAdmin() {
 
   return (
     <CoverLayout image={bgImage}>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {showError()}
       {showSuccess()}
       {showLoading()}

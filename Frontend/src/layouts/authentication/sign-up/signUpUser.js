@@ -4,6 +4,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-duplicates */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-curly-brace-presence */
 /**
 =========================================================
@@ -58,7 +59,8 @@ import { Form } from "reactstrap";
 
 // ? Hozla user ==> 0
 // ? ToraHailit user ==> 3
-function SignUpUser() {
+function SignUpUser(props) {
+  const { userType, title, urlType } = props;
   const [signUpData, setSignUpData] = useState({
     firstName: "",
     lastName: "",
@@ -215,7 +217,7 @@ function SignUpUser() {
       ErrorReason.push("אנא הכנס מספר אישי");
       // toast.error(ErrorReason);
     }
-    if (signUpData.personalnumber.length >= 8) {
+    if (!(signUpData.personalnumber.length === 7 || signUpData.personalnumber.length === 9)) {
       flag = false;
       ErrorReason.push("אנא וודא כי המספר האישי תקין");
       // toast.error(ErrorReason);
@@ -230,11 +232,11 @@ function SignUpUser() {
       ErrorReason.push("אנא הכנס שם משפחה");
       // toast.error(ErrorReason);
     }
-    if (signUpData.userType === "") {
-      flag = false;
-      ErrorReason.push("אנא בחר מערכת להרשמה");
-      // toast.error(ErrorReason);
-    }
+    // if (userType === "") {
+    //   flag = false;
+    //   ErrorReason.push("אנא בחר מערכת להרשמה");
+    //   // toast.error(ErrorReason);
+    // }
     if (flag !== true) {
       ErrorReason.forEach((reason) => {
         toast.error(reason);
@@ -254,23 +256,32 @@ function SignUpUser() {
       firstName: signUpData.firstName,
       lastLame: signUpData.lastName,
       personalnumber: signUpData.personalnumber,
-      admin: signUpData.userType,
+      admin: userType,
       approved: true,
     };
     await axios
       .post(`http://localhost:5000/HozlaApi/signup`, newUser)
       .then((res) => {
-        console.log(`gotten new user from sign up`);
-        console.log(`${res.data}`);
-        console.log({ personalnumber: res.data.user.personalnumber });
-        console.log(res.data.user.personalnumber);
-        authenticate(res.data);
-        setSignUpData({ ...signUpData, loading: false, error: false, successmsg: true });
-        const count = parseInt(localStorage.getItem("RefreshCount"), 10) + 1;
-        updateRefreshCount(count);
+        // console.log(`gotten new user from sign up`);
+        // console.log(`${res.data.user}`);
+        // console.log({ personalnumber: res.data.user.personalnumber });
+        // console.log(res.data.user.personalnumber);
+        if (res.data.user === "Exist") {
+          setSignUpData({
+            ...signUpData,
+            loading: false,
+            error: true,
+            errortype: "משתמש כבר קיים במערכת",
+          });
+        } else {
+          authenticate(res.data);
+          setSignUpData({ ...signUpData, loading: false, error: false, successmsg: true });
+          const count = parseInt(localStorage.getItem("RefreshCount"), 10) + 1;
+          updateRefreshCount(count);
+        }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setSignUpData({ ...signUpData, loading: false, error: true, successmsg: false });
       });
   };
@@ -297,7 +308,7 @@ function SignUpUser() {
         textAlign="center"
       >
         <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-          {`מערכת הוצל"א / תורה חילית`}
+          {title}
         </MDTypography>
         <MDTypography display="block" variant="button" color="white" my={1}>
           הגיע הזמן להירשם אלינו 😉
@@ -341,7 +352,7 @@ function SignUpUser() {
               fullWidth
             />
           </MDBox>
-          <MDBox mb={2}>
+          {/* <MDBox mb={2}>
             <FormControl required>
               <InputLabel id="demo-simple-select-autowidth-label">בחר מערכת</InputLabel>
               <Select
@@ -349,7 +360,7 @@ function SignUpUser() {
                 labelId="demo-simple-select-autowidth-label"
                 name="userType"
                 id="demo-simple-select-autowidth"
-                value={signUpData.userType}
+                value={userType}
                 onChange={handleChange}
                 autoWidth
                 label="בחר מערכת"
@@ -359,7 +370,7 @@ function SignUpUser() {
                 <MenuItem value="3">תורה חילית</MenuItem>
               </Select>
             </FormControl>
-          </MDBox>
+          </MDBox> */}
           {/* <MDBox display="flex" alignItems="center" ml={-1}>
               <Checkbox />
               <MDTypography
@@ -381,11 +392,11 @@ function SignUpUser() {
                 Terms and Conditions
               </MDTypography>
             </MDBox> */}
-          {signUpData.userType === "0" ? (
+          {userType === "0" ? (
             <MDTypography textGradient variant="caption" fontWeight="medium" color="error">
               {` *שים לב, שרק חיילי מפקדת מקטנא"ר יכולים להירשם למערכת הוצל"א`}
             </MDTypography>
-          ) : signUpData.userType === "3" ? (
+          ) : userType === "3" ? (
             <MDTypography textGradient variant="caption" fontWeight="medium" color="error">
               {` *שים לב, שרק חיילים שלא שייכים למפקדת מקטנא"ר יכולים להירשם למערכת תורה חילית`}
             </MDTypography>
@@ -399,7 +410,7 @@ function SignUpUser() {
             <MDTypography variant="button" color="text">
               <MDTypography
                 component={Link}
-                to="/authentication/sign-in"
+                to={`/authentication/${urlType}/sign-in`}
                 variant="button"
                 color="mekatnar"
                 fontWeight="medium"
@@ -416,6 +427,18 @@ function SignUpUser() {
 
   return (
     <CoverLayout image={bgImage}>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {showError()}
       {showSuccess()}
       {showLoading()}

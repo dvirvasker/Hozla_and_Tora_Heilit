@@ -354,15 +354,40 @@ export default function App() {
                 {/* <Route path="/authentication/sign-in">
                   <Route path=":idUR" element={<SignInURL />} />
                 </Route> */}
-                <Route path="/authentication/sign-in" element={<SignInForm />} />
-                <Route path="/authentication/sign-up" element={<SignUpUser />} />
+                {/* hozla */}
+                <Route
+                  path="/authentication/SG96bGFTeXN0ZW0/sign-in"
+                  element={<SignInForm title={`מערכת הוצל"א`} urlType="SG96bGFTeXN0ZW0" />}
+                />
+                <Route
+                  path="/authentication/SG96bGFTeXN0ZW0/sign-up"
+                  element={
+                    <SignUpUser userType="0" title={`מערכת הוצל"א`} urlType="SG96bGFTeXN0ZW0" />
+                  }
+                />
+
+                {/* Tora heilit */}
+                <Route
+                  path="/authentication/VG9yYUhlaWxpdA/sign-in"
+                  element={<SignInForm title={`מערכת תורה חילית`} urlType="VG9yYUhlaWxpdA" />}
+                />
+                <Route
+                  path="/authentication/VG9yYUhlaWxpdA/sign-up"
+                  element={
+                    <SignUpUser userType="3" title={`מערכת תורה חילית`} urlType="VG9yYUhlaWxpdA" />
+                  }
+                />
                 <Route path="/authentication/admin/sign-up" element={<SignUpAdmin />} />
-                {/* <Route path="/Error404" element={<Error404 />} /> */}
+
                 <Route path="/about-us" element={<AboutPage />} />
-                <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
+                <Route
+                  path="/"
+                  element={<Navigate to="/authentication/SG96bGFTeXN0ZW0/sign-in" />}
+                />
                 {/* <Route path="*" element={<Navigate to="/authentication/sign-in" />} /> */}
                 {/* <Route path="/" element={<Navigate to="/about-us" />} /> */}
-                {/* <Route path="*" element={<Navigate to="/Error404" />} /> */}
+                <Route path="/Error404" element={<Error404 />} />
+                <Route path="*" element={<Navigate to="/Error404" />} />
               </Routes>
             )}
           </ThemeProvider>

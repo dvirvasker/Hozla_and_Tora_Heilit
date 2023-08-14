@@ -56,7 +56,8 @@ import BasicLayout from "../components/BasicLayout";
 
 // import bgImage from "assets/images/max-burger-DMRQmC8gRBs-unsplash.jpg";
 
-function signIn() {
+function signIn(props) {
+  const { title, urlType } = props;
   // const [rememberMe, setRememberMe] = useState(false);
   // const handleSetRememberMe = () => setRememberMe(!rememberMe);
   // const { user } = isAuthenticated();
@@ -211,7 +212,13 @@ function signIn() {
     let flag = true;
     const ErrorReason = [];
 
-    if (signInData.personalnumber === "" && signInData.personalnumber.length >= 8) {
+    if (
+      !(
+        signInData.personalnumber === "" ||
+        signInData.personalnumber.length === 7 ||
+        signInData.personalnumber.length === 9
+      )
+    ) {
       flag = false;
       ErrorReason.push("אנא הכנס מספר אישי תקין");
       // toast.error(ErrorReason);
@@ -304,7 +311,7 @@ function signIn() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            {'התחברות למערכת הוצל"א'}
+            התחברות ל{title}
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
@@ -331,7 +338,7 @@ function signIn() {
                 עוד לא נרשמת?{" "}
                 <MDTypography
                   component={Link}
-                  to="/authentication/sign-up"
+                  to={`/authentication/${urlType}/sign-up`}
                   variant="button"
                   color="mekatnar"
                   fontWeight="medium"
@@ -353,6 +360,18 @@ function signIn() {
       {/* <DashboardNavbar /> */}
       {/* <MDBox pt={6} pb={3}> */}
       {/* //! fot the pop up warning windoes */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       {showError()}
       {showSuccess()}
       {showLoading()}

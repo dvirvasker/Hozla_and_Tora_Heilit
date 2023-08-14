@@ -4,22 +4,33 @@ const User = require("../../models/authentication/user.model");
 //const {errorHandler} = require('../helpers/dbErrorHandler');
 
 exports.signup = (req, res) => {
-  console.log(
-    `The SignUp server function`
-  );
+  console.log(`The SignUp server function`);
   console.log("req.body", req.body);
-  const user = new User(req.body);
-  user.save((err, user) => {
-    if (err) {
-      return res.status(400).json({
-        // err: errorHandler(err)
+  User.findOne({ personalnumber: req.body.personalnumber }, (err, user) => {
+    console.log(
+      `The SignIn server function - personalnumber: ${req.body.personalnumber}`
+    );
+    console.log(`The SignIn-up server function - user:`);
+    console.log(user);
+    if (!(!user || user === undefined)) {
+      return res.json({
+        user: "Exist", //"משתמש עם מספר אישי זה אינו קיים",
+      });
+    } else {
+      const user = new User(req.body);
+      user.save((err, user) => {
+        if (err) {
+          return res.status(400).json({
+            // err: errorHandler(err)
+          });
+        }
+        // user.salt = undefined;
+        // user.hashed_password = undefined;
+        res.json({
+          user,
+        });
       });
     }
-    // user.salt = undefined;
-    // user.hashed_password = undefined;
-    res.json({
-      user,
-    });
   });
 };
 
