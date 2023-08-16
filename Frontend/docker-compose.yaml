@@ -1,0 +1,98 @@
+# services:
+#   frontend:
+#     build:
+#       context: frontend
+#       target: Production
+#     ports:
+#       - 3000:3000
+#     stdin_open: true
+#     volumes:
+#       - ./frontend:/usr/src/app
+#       - /usr/src/app/node_modules
+#     restart: always
+#     networks:
+#       - react-express
+#     depends_on:
+#       - backend
+
+#   backend:
+#     restart: always
+#     build:
+#       context: backend
+#       target: Production
+#     volumes:
+#       - ./backend:/usr/src/app
+#       - /usr/src/app/node_modules
+#     depends_on:
+#       - mongo
+#     networks:
+#       - express-mongo
+#       - react-express
+#     expose:
+#       - 3000
+
+#   mongo:
+#     image: mongo
+#     restart: always
+#     environment:
+#       - MONGO_INITDB_ROOT_USERNAME=userAdmin
+#       - MONGO_INITDB_ROOT_PASSWORD=userPassword
+#     volumes:
+#       - ./data:/data/db
+#     networks:
+#       - express-mongo
+#     expose:
+#       - 27017
+# networks:
+#   react-express:
+#   express-mongo:
+# ------------------------------------------------------------------------
+# version: "3.8"
+services:
+  mongodb:
+    image: "mongo"
+    restart: always
+    ports:
+      - '2717:27017'
+    networks:
+      - hozla-app-network
+    volumes:
+      - ./hozla_data/db:/data/db
+
+  backend:
+    build: ./Backend
+    ports:
+      - "5000:5000"
+    networks:
+      - hozla-app-network
+    # volumes:
+    #   - logs:/app/logs
+    #   - ./Backend:/app
+    #   - /app/node_modules
+    depends_on:
+      - mongodb
+    links:
+     - mongodb
+
+  frontend:
+    build: ./Frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - hozla-app-network
+    # volumes:
+    #   - ./Frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+# volumes:
+#   mongodb:
+#     driver: local
+#   # logs:
+
+
+networks:
+  hozla-app-network:
+    driver: bridge

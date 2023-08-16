@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-unresolved */
 /**
 =========================================================
 * Material Dashboard 2 React - v2.1.0
@@ -13,10 +15,10 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 /* eslint-disable no-lonely-if */
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -257,7 +259,7 @@ function AnnualInfoAdmin() {
   // };
 
   // console.log(formData);
-  console.log(params);
+  // console.log(params);
 
   // const createPDF = () => {
   //   const doc = new JSPDF({

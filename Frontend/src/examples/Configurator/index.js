@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
 /**
 =========================================================
@@ -14,40 +16,45 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // react-github-btn
 import GitHubButton from "react-github-btn";
 
 // @mui material components
 import Divider from "@mui/material/Divider";
-import Switch from "@mui/material/Switch";
+import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
-import Icon from "@mui/material/Icon";
+import Switch from "@mui/material/Switch";
 
 // @mui icons
-import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
+import MDTypography from "components/MDTypography";
 
 // Custom styles for the Configurator
 import ConfiguratorRoot from "examples/Configurator/ConfiguratorRoot";
 
 // Material Dashboard 2 React context
 import {
-  useMaterialUIController,
+  setDarkMode,
+  setFixedNavbar,
   setOpenConfigurator,
+  setSidenavColor,
   setTransparentSidenav,
   setWhiteSidenav,
-  setFixedNavbar,
-  setSidenavColor,
-  setDarkMode,
+  useMaterialUIController,
 } from "context";
+
+import { authenticate, isAuthenticated, signout } from "auth/index";
+import axios from "axios";
+
+const { user } = isAuthenticated();
 
 function Configurator() {
   const [controller, dispatch] = useMaterialUIController();
@@ -127,6 +134,20 @@ function Configurator() {
       color: darkMode ? background.sidenav : white.main,
     },
   });
+
+  const hadleDeleteUser = () => {
+    axios
+      .post(`http://localhost:5000/HozlaApi/user/remove/${user._id}`, {})
+      .then((response) => {
+        if (response.data) {
+          signout();
+          window.location.reload(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
@@ -285,20 +306,17 @@ function Configurator() {
 
           <Switch checked={darkMode} onChange={handleDarkMode} />
         </MDBox>
-        {/* <Divider />
+        <Divider />
         <MDBox mt={3} mb={2}>
           <MDButton
-            component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/material-dashboard/"
-            target="_blank"
-            rel="noreferrer"
-            color={darkMode ? "light" : "dark"}
+            color={darkMode ? "error" : "error"}
             variant="outlined"
+            onClick={hadleDeleteUser}
             fullWidth
           >
-            view documentation
+            מחק משתמש
           </MDButton>
-        </MDBox> */}
+        </MDBox>
         {/* <MDBox display="flex" justifyContent="center">
           <GitHubButton
             href="https://github.com/creativetimofficial/material-dashboard-react"

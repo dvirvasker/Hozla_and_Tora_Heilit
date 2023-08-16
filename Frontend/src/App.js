@@ -95,8 +95,8 @@ export default function App() {
   const params = useParams();
 
   const [user, setUser] = useState(isAuthenticated());
-  console.log("User in App");
-  console.log(user);
+  // console.log("User in App");
+  // console.log(user);
   const [isAdmin, setIsAdmin] = useState(!(user.admin === "0"));
   // console.log("User in App");
   // console.log(user);

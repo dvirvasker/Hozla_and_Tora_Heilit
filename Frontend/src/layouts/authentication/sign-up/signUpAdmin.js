@@ -49,6 +49,7 @@ import { authenticate, isAuthenticated, signin, signout, updateRefreshCount } fr
 
 // Images
 import bgImage from "assets/images/book-bg-image.jpg";
+import { inesilizeRefreshCount } from "auth/index";
 import axios from "axios";
 import { Form } from "reactstrap";
 
@@ -102,7 +103,7 @@ function SignUpAdmin() {
   // eslint-disable-next-line react/no-unstable-nested-components
   function NavigateUser() {
     if (signUpData.NavigateToReferrer) {
-      return <Navigate to="/authentication/sign-in" />;
+      return <Navigate to="/authentication/SG96bGFTeXN0ZW0/sign-in" />;
     }
   }
 
@@ -265,9 +266,10 @@ function SignUpAdmin() {
             errortype: "משתמש כבר קיים במערכת",
           });
         } else {
+          // inesilizeRefreshCount();
           setSignUpData({ ...signUpData, loading: false, error: false, successmsg: true });
-          const count = parseInt(localStorage.getItem("RefreshCount"), 10) + 1;
-          updateRefreshCount(count);
+          // const count = parseInt(localStorage.getItem("RefreshCount"), 10) + 1;
+          // updateRefreshCount(count);
         }
       })
       .catch((error) => {

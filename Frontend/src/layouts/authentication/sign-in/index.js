@@ -263,6 +263,8 @@ function signIn(props) {
             successmsg: false,
             error: true,
           });
+          const count = parseInt(localStorage.getItem("RefreshCount"), 10) + 1;
+          updateRefreshCount(count);
         } else {
           authenticate(res.data);
           setSignInData({
