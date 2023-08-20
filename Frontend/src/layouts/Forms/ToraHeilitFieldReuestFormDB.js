@@ -730,7 +730,7 @@ const ToraHeilitFieldReuestFormDB = () => {
                   {toraHeilitVolume.map((volume, index) => (
                     // <Container>
                     <Grid item xs={6} sm={4} md={4} key={index} spacing={3}>
-                      {user.admin === "0" || formData.status >= 125 ? (
+                      {user.admin === "0" || user.admin === "3" || formData.status >= 125 ? (
                         <FormGroup>
                           <MDTypography variant="h6" color="mekatnar">
                             {volume.volumeType}:
@@ -881,19 +881,22 @@ const ToraHeilitFieldReuestFormDB = () => {
                     </MDAlert>
                   </FormGroup>
                 )}
-                {user.admin !== "0" && formData.status < 125 && (
-                  <div className="text-center">
-                    <MDButton
-                      color="mekatnar"
-                      size="large"
-                      onClick={updateNumToraVol}
-                      className="btn-new-blue"
-                      // type="submit"
-                    >
-                      עדכן מספר עותקים
-                    </MDButton>
-                  </div>
-                )}
+                {(user.admin === "1" || user.admin === "2") &&
+                  user.admin !== "0" &&
+                  user.admin !== "3" &&
+                  formData.status < 125 && (
+                    <div className="text-center">
+                      <MDButton
+                        color="mekatnar"
+                        size="large"
+                        onClick={updateNumToraVol}
+                        className="btn-new-blue"
+                        // type="submit"
+                      >
+                        עדכן מספר עותקים
+                      </MDButton>
+                    </div>
+                  )}
               </Form>
             </CardBody>
           </Card>
