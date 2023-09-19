@@ -386,6 +386,14 @@ export default function App() {
                 />
                 {/* <Route path="*" element={<Navigate to="/authentication/sign-in" />} /> */}
                 {/* <Route path="/" element={<Navigate to="/about-us" />} /> */}
+                <Route
+                  path="/Hozla"
+                  element={<Navigate to="/authentication/SG96bGFTeXN0ZW0/sign-in" />}
+                />
+                <Route
+                  path="/ToraHailit"
+                  element={<Navigate to="/authentication/VG9yYUhlaWxpdA/sign-in" />}
+                />
                 <Route path="/Error404" element={<Error404 />} />
                 <Route path="*" element={<Navigate to="/Error404" />} />
               </Routes>
