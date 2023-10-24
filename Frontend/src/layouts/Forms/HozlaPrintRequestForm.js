@@ -1326,6 +1326,24 @@ export default function HozlaPrintRequestForm() {
                       </FormGroup>
                     </Container>
                   )}
+
+                  <FormGroup>
+                    <Label for="clientNote">הערות נוספות...</Label>
+                    <Input
+                      name="clientNote"
+                      type="textarea"
+                      // label=""
+                      onChange={handleChangeTxtAera}
+                      style={{ minWidth: 360 }}
+                      multiline
+                      rows={3}
+                      // contrast
+                      value={data.clientNote}
+                      // value={() => {
+                      //   setTextArea({ ...textArea, txt: filePush.name });
+                      // }}
+                    />
+                  </FormGroup>
                   {
                     // <Container>
                     //   <DragDropContext onDragEnd={handleOnDragEnd}>
