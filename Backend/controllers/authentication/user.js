@@ -46,9 +46,25 @@ exports.getAllMenagmentUsers = (req, res) => {
   // console.log(req.body);
 };
 
+exports.getRegularUsers = (req, res) => {
+  User.find({ $or: [{ admin: "0" }, { admin: "3" }] })
+    .sort({ admin: -1 })
+    .then((orders) => res.json(orders))
+    .catch((err) => res.status(400).json("Error: " + err));
+  // console.log(req.body);
+};
 exports.update = async (req, res) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
+  });
+  if (!user) {
+    res.status(404).send({ message: "שגיאה בעדכון" });
+  }
+  res.status(200).send(user);
+};
+exports.updateTypeUser = async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, {
+    admin: req.body.admin,
   });
   if (!user) {
     res.status(404).send({ message: "שגיאה בעדכון" });

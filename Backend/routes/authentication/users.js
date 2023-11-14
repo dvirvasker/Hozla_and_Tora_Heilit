@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 const {
   find,
   getuserbyid,
@@ -9,7 +10,9 @@ const {
   remove,
   usersbyrole,
   getAllUsers,
+  getRegularUsers,
   getAllMenagmentUsers,
+  updateTypeUser,
 } = require("../../controllers/authentication/user");
 
 router.post("/getuserbyid", getuserbyid);
@@ -22,7 +25,11 @@ router.get("/getAllUsers", getAllUsers);
 
 router.get("/getAllMenagmentUsers", getAllMenagmentUsers);
 
+router.get("/getRegularUsers", getRegularUsers);
+
 router.put("/user/update/:id", update);
+
+router.put("/user/updateTypeUser/:id", updateTypeUser);
 
 router.post("/user/remove/:userId", remove);
 

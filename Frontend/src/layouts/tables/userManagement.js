@@ -39,6 +39,7 @@ import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 import regulsrUserRequestsTableData from "layouts/tables/data/regulsrUserRequestsTableData";
 import userManagementData from "layouts/tables/data/userManagementData";
+import RegularUserManagementData from "layouts/tables/data/RegularUserManagementData";
 import { useEffect, useState } from "react";
 
 import { authenticate, isAuthenticated, signin } from "auth/index";
@@ -47,7 +48,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import { CardBody, Col, Container, Form, FormGroup, FormText, Input, Label, Row } from "reactstrap";
 
 const adminManagementTable = () => {
-  const tableTittle = "ניהול משתמשים";
+  let tableRegularUserTittle = "ניהול משתמשים";
+  let tableTittle = "ניהול מנהלים";
 
   const [dbError, setDbError] = useState(false);
   //   const { columns, rows } = authorsTableData();
@@ -59,6 +61,12 @@ const adminManagementTable = () => {
   }, []);
 
   const { columns: pColumns, rows: pRows, dbError: dbe, setDBerror: setDbe } = userManagementData();
+  const {
+    columnsRegular: pcolumnsRegular,
+    rowsRegular: prowsRegular,
+    dbErrorRegular: dbERegular,
+    setDBerror: psetDBe,
+  } = RegularUserManagementData();
   const handleErrorClose = () => {
     setDbError(true);
     setDbe(false);
@@ -138,11 +146,57 @@ const adminManagementTable = () => {
       </Grid>
     </MDBox>
   );
+
+  const tableRegularUser = () => (
+    <MDBox pt={6} pb={3}>
+      <Grid container spacing={6}>
+        <Grid item xs={12}>
+          <Card>
+            <MDBox
+              mx={2}
+              mt={-3}
+              py={3}
+              px={2}
+              variant="gradient"
+              bgColor="mekatnar"
+              borderRadius="lg"
+              coloredShadow="mekatnar"
+            >
+              <MDTypography variant="h3" color="white">
+                {tableRegularUserTittle}
+              </MDTypography>
+            </MDBox>
+            <MDBox pt={3}>
+              {prowsRegular.length !== 0 ? (
+                <DataTable
+                  table={{ columns: pcolumnsRegular, rows: prowsRegular }}
+                  isSorted={true}
+                  canSearch={true}
+                  entriesPerPage={false}
+                  showTotalEntries={true}
+                  noEndBorder={false}
+                />
+              ) : psetDBe || dbERegular ? (
+                <MDTypography mx={30} variant="h3" color="error" textGradient={true}>
+                  תקלת שרת{" "}
+                </MDTypography>
+              ) : (
+                <MDTypography mx={30} variant="h3" color="mekatnar" textGradient={true}>
+                  לא קיימים משתמשים במערכת
+                </MDTypography>
+              )}
+            </MDBox>
+          </Card>
+        </Grid>
+      </Grid>
+    </MDBox>
+  );
   return (
     <DashboardLayout>
       <DashboardNavbar />
       {showError()}
       {table()}
+      {tableRegularUser()}
       <Outlet />
       <Footer />
     </DashboardLayout>
